@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bim8w7s70lfbb"]
+
+[ext_resource type="Texture2D" uid="uid://dlr1tmmj24u3u" path="res://assets/sprites/light.png" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://0hkt3ew7qjwq" path="res://icon.svg" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://cbxb2ln75d0qc" path="res://scenes/player.gd" id="2_lnu2h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(128, 128)
+
+[node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(637, 357.5)
+scale = Vector2(9.92188, 5.57031)
+texture = ExtResource("1_yqjtg")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Background"]
+position = Vector2(-64.2016, -64.1795)
+scale = Vector2(0.100787, 0.179523)
+color = Color(0, 0, 0, 1)
+
+[node name="Enemy" type="Sprite2D" parent="."]
+position = Vector2(761, 332)
+texture = ExtResource("1_yqjtg")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(612, 340)
+script = ExtResource("2_lnu2h")
+
+[node name="Enemy" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_yqjtg")
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+scale = Vector2(2, 2)
+color = Color(0.999999, 0.813079, 0.750217, 1)
+texture = ExtResource("1_uwrxv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_yqjtg")
