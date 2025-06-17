@@ -9,12 +9,13 @@ extends CharacterBody2D
 @export var ray_count: int = 30
 
 @onready var vision_cone := $Polygon2D
-@onready var player := get_node("../Player")
+@onready var player := get_node(target_node)
 
 var path: PackedVector2Array = []
 var path_index := 0
 var patrol_index := 0
 var chasing := false
+var player_seen := false
 
 func _ready():
 	update_path_to(patrol_points[patrol_index])
@@ -22,12 +23,11 @@ func _ready():
 func _physics_process(delta: float):
 	update_vision_cone()
 
-	var player = get_node(target_node)
-
-	if is_player_visible(player):
+	if player_seen:
 		if not chasing:
 			chasing = true
 		update_path_to(player.global_position)
+		vision_cone.look_at(player.global_position)
 	elif not chasing and path_index >= path.size():
 		patrol_index = (patrol_index + 1) % patrol_points.size()
 		update_path_to(patrol_points[patrol_index])
@@ -54,18 +54,13 @@ func update_path_to(target_pos: Vector2):
 	path = NavigationServer2D.map_get_path(map, global_position, target_pos, false)
 	path_index = 0
 
-func is_player_visible(player: Node2D) -> bool:
-	var space = get_world_2d().direct_space_state
-	var query := PhysicsRayQueryParameters2D.create(global_position, player.global_position)
-	query.exclude = [self]
-	var result = space.intersect_ray(query)
-	return result.collider == player
-
 func update_vision_cone():
 	var points: Array[Vector2] = [Vector2.ZERO]
 	var start_angle = -cone_angle / 2.0
 	var angle_step = cone_angle / ray_count
 	var space_state = get_world_2d().direct_space_state
+
+	player_seen = false  # Reset before raycasting
 
 	for i in range(ray_count + 1):
 		var angle_rad = deg_to_rad(start_angle + i * angle_step)
@@ -77,8 +72,10 @@ func update_vision_cone():
 		var result = space_state.intersect_ray(query)
 		var hit_point = result.position if result else target
 		points.append(to_local(hit_point))
-		
-		if result and result.collider == player:
-			vision_cone.color = Color.RED
 
+		if result and result.collider == player:
+			player_seen = true
+
+	# Change vision cone color
+	vision_cone.color = Color.RED if player_seen else Color.WHITE
 	vision_cone.polygon = points
