@@ -26,7 +26,6 @@ tile_map_data = PackedByteArray("AADJABYAEAAAAAAAAADKABYAHQAAAAAAABDCABMAHQAAAAA
 tile_set = ExtResource("1_p57ef")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="TileMapLayer"]
-visible = false
 position = Vector2(-0.000549316, 0.000305176)
 scale = Vector2(0.999996, 0.999999)
 color = Color(0, 0, 0, 1)
