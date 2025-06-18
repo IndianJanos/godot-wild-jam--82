@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=35 format=3 uid="uid://c3xn7o75bmbg0"]
+[gd_resource type="TileSet" load_steps=43 format=3 uid="uid://c3xn7o75bmbg0"]
 
 [ext_resource type="Texture2D" uid="uid://d0ah1vmcbrkkm" path="res://assets/sprites/tiles/1750166069312.png" id="1_jdcxo"]
 [ext_resource type="Texture2D" uid="uid://0xw8lvshyb8s" path="res://assets/sprites/tiles/1750166078667.png" id="2_fe6df"]
@@ -16,7 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://w7wqiryii7uy" path="res://assets/sprites/tiles/1750166259238.png" id="14_eus4p"]
 [ext_resource type="Texture2D" uid="uid://bvm846vqovyv7" path="res://assets/sprites/tiles/1750166328374.png" id="15_y4ej0"]
 [ext_resource type="Texture2D" uid="uid://ddgcdjc1iqmrj" path="res://assets/sprites/tiles/1750182851463.png" id="17_3jax3"]
+[ext_resource type="Texture2D" uid="uid://buoti16xpifmr" path="res://assets/sprites/tiles/1750236575980.png" id="18_3jax3"]
 [ext_resource type="Texture2D" uid="uid://corvcqq8l6wva" path="res://assets/sprites/tiles/pixil-frame-0.png" id="18_fh0o0"]
+[ext_resource type="Texture2D" uid="uid://d325mkvdbdu70" path="res://assets/sprites/tiles/pixil-frame-0 (1).png" id="19_fh0o0"]
+[ext_resource type="Texture2D" uid="uid://8kqto2hkxdo3" path="res://assets/sprites/tiles/1750238904117.png" id="20_fh0o0"]
+[ext_resource type="Texture2D" uid="uid://cykp3i3d74f28" path="res://assets/sprites/tiles/1750239191093.png" id="21_y5v4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dbrk"]
 texture = ExtResource("1_jdcxo")
@@ -119,6 +123,26 @@ texture = ExtResource("18_fh0o0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y5v4p"]
+texture = ExtResource("18_3jax3")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gplk0"]
+texture = ExtResource("19_fh0o0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eiob1"]
+texture = ExtResource("20_fh0o0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v0jtk"]
+texture = ExtResource("21_y5v4p")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
@@ -139,3 +163,7 @@ sources/28 = SubResource("TileSetAtlasSource_gu1er")
 sources/29 = SubResource("TileSetAtlasSource_edfl0")
 sources/36 = SubResource("TileSetAtlasSource_cfwvw")
 sources/37 = SubResource("TileSetAtlasSource_x7383")
+sources/41 = SubResource("TileSetAtlasSource_y5v4p")
+sources/42 = SubResource("TileSetAtlasSource_gplk0")
+sources/43 = SubResource("TileSetAtlasSource_eiob1")
+sources/44 = SubResource("TileSetAtlasSource_v0jtk")
