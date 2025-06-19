@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://bymq0ctd1hpyl" path="res://scripts/enemy.gd" id="4_lbhrr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_iywne"]
-vertices = PackedVector2Array(483, 448.031, 219, 448.961, 219, 266, 483, 266)
+vertices = PackedVector2Array(274.031, 196.328, 10, 196.328, 10, 10, 274.031, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(209, 256, 493, 256, 493, 458, 209, 459)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-0.000488281, 0, 284.031, 0, 284.031, 206.33, -0.000488281, 206.33)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
 size = Vector2(25, 721)
@@ -26,12 +26,13 @@ tile_map_data = PackedByteArray("AADJABYAEAAAAAAAAADKABYAHQAAAAAAABDCABMAHQAAAAA
 tile_set = ExtResource("1_p57ef")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="TileMapLayer"]
+visible = false
 position = Vector2(-0.000549316, 0.000305176)
 scale = Vector2(0.999996, 0.999999)
 color = Color(0, 0, 0, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="TileMapLayer"]
-position = Vector2(6002, 318)
+position = Vector2(6208.68, 570.441)
 navigation_polygon = SubResource("NavigationPolygon_iywne")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -57,15 +58,22 @@ texture = ExtResource("1_uwrxv")
 position = Vector2(13.5, 361.5)
 shape = SubResource("RectangleShape2D_lnu2h")
 
-[node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(6360, 647)
+[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("vision_cone", "pivot")]
+position = Vector2(6292, 592)
 script = ExtResource("4_lbhrr")
 target_node = NodePath("../Player")
-nav_region_path = NodePath("../TileMapLayer/NavigationRegion2D")
-patrol_points = Array[Vector2]([Vector2(6359, 668), Vector2(6150, 668)])
+patrol_points = Array[Vector2]([Vector2(6420, 688), Vector2(6292, 592)])
 cone_length = 50.0
+vision_cone = NodePath("Pivot/Polygon2D")
+pivot = NodePath("Pivot")
 
-[node name="Polygon2D" type="Polygon2D" parent="Enemy"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
+debug_enabled = true
+
+[node name="Pivot" type="Node2D" parent="Enemy"]
+
+[node name="Polygon2D" type="Polygon2D" parent="Enemy/Pivot"]
+color = Color(0, 1, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2(0, -4)
@@ -93,7 +101,7 @@ position = Vector2(13.5, 361.5)
 shape = SubResource("RectangleShape2D_lnu2h")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(6341, 680)
+position = Vector2(6352, 740)
 script = ExtResource("2_lnu2h")
 speed = 15000.0
 

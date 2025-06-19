@@ -2,80 +2,63 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 @export var target_node: NodePath
-@export var nav_region_path: NodePath
 @export var patrol_points: Array[Vector2] = []
 @export var cone_length: float = 200.0
 @export var cone_angle: float = 90.0
-@export var ray_count: int = 30
+@export var ray_count: int = 60
+@export var vision_cone: Polygon2D
+@export var pivot: Node2D
 
-@onready var vision_cone := $Polygon2D
-@onready var player := get_node(target_node)
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var player: Node2D = get_node(target_node)
 
-var path: PackedVector2Array = []
-var path_index := 0
-var patrol_index := 0
-var chasing := false
-var player_seen := false
+var patrol_index: int = 0
+var player_seen: bool = false
 
 func _ready():
-	update_path_to(patrol_points[patrol_index])
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 
-func _physics_process(delta: float):
+	if patrol_points.size() > 0:
+		nav_agent.target_position = patrol_points[patrol_index]
+
+func _physics_process(_delta: float) -> void:
 	update_vision_cone()
 
-	if player_seen:
-		if not chasing:
-			chasing = true
-		update_path_to(player.global_position)
-		vision_cone.look_at(player.global_position)
-	elif not chasing and path_index >= path.size():
+	if nav_agent.is_navigation_finished() and patrol_points.size() > 0:
 		patrol_index = (patrol_index + 1) % patrol_points.size()
-		update_path_to(patrol_points[patrol_index])
-		vision_cone.look_at(patrol_points[patrol_index])
-
-	move_along_path()
-
-func move_along_path():
-	if path_index >= path.size():
-		velocity = Vector2.ZERO
-		return
-
-	var target_pos = path[path_index]
-	var direction = (target_pos - global_position).normalized()
-	velocity = direction * speed
+		nav_agent.target_position = patrol_points[patrol_index]
+		pivot.look_at(patrol_points[patrol_index])
+	
+	var direction = global_position.direction_to(nav_agent.get_next_path_position())
+	nav_agent.velocity = direction * speed
 	move_and_slide()
 
-	if global_position.distance_to(target_pos) < 4.0:
-		path_index += 1
-
-func update_path_to(target_pos: Vector2):
-	var nav_region = get_node(nav_region_path) as NavigationRegion2D
-	var map = nav_region.get_navigation_map()
-	path = NavigationServer2D.map_get_path(map, global_position, target_pos, false)
-	path_index = 0
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = velocity.move_toward(safe_velocity, 100)
 
 func update_vision_cone():
 	var points: Array[Vector2] = [Vector2.ZERO]
 	var start_angle = -cone_angle / 2.0
 	var angle_step = cone_angle / ray_count
+	var origin = pivot.global_position
 	var space_state = get_world_2d().direct_space_state
 
-	player_seen = false  # Reset before raycasting
+	player_seen = false
 
 	for i in range(ray_count + 1):
 		var angle_rad = deg_to_rad(start_angle + i * angle_step)
-		var direction = global_transform.x.rotated(angle_rad)
-		var target = global_position + direction * cone_length
+		var direction = Vector2.RIGHT.rotated(pivot.rotation + angle_rad)
+		var target = origin + direction * cone_length
 
-		var query = PhysicsRayQueryParameters2D.create(global_position, target)
+		var query = PhysicsRayQueryParameters2D.create(origin, target)
 		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
+
 		var hit_point = result.position if result else target
-		points.append(to_local(hit_point))
+		points.append(pivot.to_local(hit_point))
 
 		if result and result.collider == player:
 			player_seen = true
 
-	# Change vision cone color
-	vision_cone.color = Color.RED if player_seen else Color.WHITE
+	vision_cone.color = Color.RED if player_seen else Color.GREEN
 	vision_cone.polygon = points
