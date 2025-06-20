@@ -1,22 +1,13 @@
-[gd_scene load_steps=10 format=4 uid="uid://bim8w7s70lfbb"]
+[gd_scene load_steps=5 format=4 uid="uid://bim8w7s70lfbb"]
 
 [ext_resource type="TileSet" uid="uid://c3xn7o75bmbg0" path="res://tile_sets/school.tres" id="1_p57ef"]
-[ext_resource type="Texture2D" uid="uid://dlr1tmmj24u3u" path="res://assets/sprites/light.png" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://0hkt3ew7qjwq" path="res://icon.svg" id="1_yqjtg"]
-[ext_resource type="Script" uid="uid://cbxb2ln75d0qc" path="res://scripts/player.gd" id="2_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://c4vik3f4g8750" path="res://assets/sprites/player0.png" id="4_iywne"]
-[ext_resource type="Script" uid="uid://bymq0ctd1hpyl" path="res://scripts/enemy.gd" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://djatvehobgh17" path="res://scenes/enemies/enemy.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://b3swthp7kvu5e" path="res://scenes/player.tscn" id="3_lbhrr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_iywne"]
-vertices = PackedVector2Array(274.031, 196.328, 10, 196.328, 10, 10, 274.031, 10)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-0.000488281, 0, 284.031, 0, 284.031, 206.33, -0.000488281, 206.33)])
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
-size = Vector2(25, 721)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
-size = Vector2(15, 20)
+vertices = PackedVector2Array(138.023, 196.102, 274.031, 196.328, 10, 196.328, 22.0078, 196.102, 266.031, 94.9609, 266.031, 30.4531, 274.031, 10, 266.031, 192.047, 150.023, 192.047, 10, 10, 146.023, 30.4531, 146.023, 94.9609, 150.023, 127.547, 138.023, 127.547, 142.023, 94.9609, 22.0078, 127.547, 142.023, 30.4531, 22.0078, 30.4531, 266.031, 127.547, 22.0078, 94.9609)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 1), PackedInt32Array(7, 1, 0, 8), PackedInt32Array(9, 6, 5, 10), PackedInt32Array(11, 12, 8, 0, 13, 14), PackedInt32Array(3, 2, 9, 15), PackedInt32Array(10, 11, 14, 16), PackedInt32Array(9, 10, 16), PackedInt32Array(9, 16, 17), PackedInt32Array(1, 7, 18), PackedInt32Array(4, 1, 18), PackedInt32Array(4, 18, 12, 11), PackedInt32Array(19, 14, 13, 15), PackedInt32Array(19, 15, 9), PackedInt32Array(19, 9, 17)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0.00244141, -0.000183105, 32.0338, -0.000160217, 32.0059, 40.4567, 32.0059, 84.9591, 132.017, 84.9591, 132.017, 40.4567, 32.0059, 40.4567, 32.0059, -0.000183105, 156.02, -0.000183105, 156.02, 40.4567, 156.02, 84.9591, 256.031, 84.9591, 256.031, 40.4567, 156.02, 40.4567, 156.02, -0.000183105, 284.031, 0, 284.034, 137.553, 256.031, 137.553, 160.02, 137.553, 160.02, 182.055, 256.031, 182.055, 256.031, 137.553, 284.034, 137.553, 284.031, 206.33, 128.017, 206.33, 128.017, 186.101, 128.017, 137.553, 32.0059, 137.553, 32.0059, 186.101, 128.017, 186.101, 128.017, 206.33, -0.000488281, 206.33)])
 
 [node name="Game" type="Node2D"]
 
@@ -35,86 +26,8 @@ color = Color(0, 0, 0, 1)
 position = Vector2(6208.68, 570.441)
 navigation_polygon = SubResource("NavigationPolygon_iywne")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(637, 357.5)
-scale = Vector2(9.92188, 5.57031)
-texture = ExtResource("1_yqjtg")
-
-[node name="Wall2" type="StaticBody2D" parent="."]
-position = Vector2(1257, 2)
-
-[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
-position = Vector2(14.25, 357.5)
-scale = Vector2(0.183594, 5.57031)
-texture = ExtResource("1_yqjtg")
-
-[node name="PointLight2D" type="PointLight2D" parent="Wall2"]
-position = Vector2(14.25, 357.5)
-scale = Vector2(0.367187, 11.1406)
-color = Color(0.999999, 0.813079, 0.750217, 1)
-texture = ExtResource("1_uwrxv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
-position = Vector2(13.5, 361.5)
-shape = SubResource("RectangleShape2D_lnu2h")
-
-[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("vision_cone", "pivot")]
+[node name="Enemy" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(6292, 592)
-script = ExtResource("4_lbhrr")
-target_node = NodePath("../Player")
-patrol_points = Array[Vector2]([Vector2(6420, 688), Vector2(6292, 592)])
-cone_length = 50.0
-vision_cone = NodePath("Pivot/Polygon2D")
-pivot = NodePath("Pivot")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
-debug_enabled = true
-
-[node name="Pivot" type="Node2D" parent="Enemy"]
-
-[node name="Polygon2D" type="Polygon2D" parent="Enemy/Pivot"]
-color = Color(0, 1, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_yqjtg")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-position = Vector2(1, -7)
-texture = ExtResource("4_iywne")
-
-[node name="Wall" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Wall"]
-position = Vector2(14.25, 357.5)
-scale = Vector2(0.183594, 5.57031)
-texture = ExtResource("1_yqjtg")
-
-[node name="PointLight2D" type="PointLight2D" parent="Wall"]
-position = Vector2(14.25, 357.5)
-scale = Vector2(0.367187, 11.1406)
-color = Color(0.999999, 0.813079, 0.750217, 1)
-texture = ExtResource("1_uwrxv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(13.5, 361.5)
-shape = SubResource("RectangleShape2D_lnu2h")
-
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("3_lbhrr")]
 position = Vector2(6352, 740)
-script = ExtResource("2_lnu2h")
-speed = 15000.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("4_iywne")
-
-[node name="PointLight2D" type="PointLight2D" parent="Player"]
-color = Color(0.999999, 0.813079, 0.750217, 1)
-texture = ExtResource("1_uwrxv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-0.5, 3)
-shape = SubResource("RectangleShape2D_yqjtg")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(3, 3)

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://djatvehobgh17"]
+
+[ext_resource type="Script" uid="uid://bymq0ctd1hpyl" path="res://scripts/enemy.gd" id="1_8e3ao"]
+[ext_resource type="Texture2D" uid="uid://c4vik3f4g8750" path="res://assets/sprites/player0.png" id="2_38ino"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iywne"]
+radius = 8.0
+height = 24.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("vision_cone", "pivot")]
+script = ExtResource("1_8e3ao")
+target_node = NodePath("../Player")
+patrol_points = Array[Vector2]([Vector2(6420, 688), Vector2(6292, 592)])
+cone_length = 50.0
+vision_cone = NodePath("Pivot/Polygon2D")
+pivot = NodePath("Pivot")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+avoidance_enabled = true
+radius = 15.0
+time_horizon_agents = 10.0
+time_horizon_obstacles = 10.0
+debug_enabled = true
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Pivot"]
+color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_iywne")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -7)
+texture = ExtResource("2_38ino")

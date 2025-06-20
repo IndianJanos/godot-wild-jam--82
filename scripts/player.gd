@@ -11,5 +11,5 @@ func _physics_process(delta: float) -> void:
 	if input_vector.length_squared() > 0:
 		input_vector = input_vector.normalized()
 
-	velocity = input_vector * speed * delta
+	velocity = input_vector * speed
 	move_and_slide()

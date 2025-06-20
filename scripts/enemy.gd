@@ -31,10 +31,10 @@ func _physics_process(_delta: float) -> void:
 	
 	var direction = global_position.direction_to(nav_agent.get_next_path_position())
 	nav_agent.velocity = direction * speed
-	move_and_slide()
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = velocity.move_toward(safe_velocity, 100)
+	move_and_slide()
 
 func update_vision_cone():
 	var points: Array[Vector2] = [Vector2.ZERO]

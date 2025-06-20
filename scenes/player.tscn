@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3swthp7kvu5e"]
+
+[ext_resource type="Script" uid="uid://cbxb2ln75d0qc" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://c4vik3f4g8750" path="res://assets/sprites/player0.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dlr1tmmj24u3u" path="res://assets/sprites/light.png" id="3_qlg0r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(15, 20)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_qhqgy")
+speed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dqkch")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4, -20)
+color = Color(0.999999, 0.813079, 0.750217, 1)
+texture = ExtResource("3_qlg0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
