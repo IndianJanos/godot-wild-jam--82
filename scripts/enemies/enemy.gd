@@ -1,19 +1,21 @@
 extends CharacterBody2D
+class_name Enemy
+
+signal player_seen
 
 @export var speed: float = 100.0
-@export var target_node: NodePath
 @export var patrol_points: Array[Vector2] = []
-@export var cone_length: float = 200.0
+@export var cone_length: float = 50.0
 @export var cone_angle: float = 90.0
-@export var ray_count: int = 60
+@export var ray_count: int = 30
 @export var vision_cone: Polygon2D
 @export var pivot: Node2D
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var player: Node2D = get_node(target_node)
+@onready var target_node: Node2D = get_node("../Player")
 
 var patrol_index: int = 0
-var player_seen: bool = false
+var is_player_seen: bool = false
 
 func _ready():
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
@@ -43,7 +45,7 @@ func update_vision_cone():
 	var origin = pivot.global_position
 	var space_state = get_world_2d().direct_space_state
 
-	player_seen = false
+	is_player_seen = false
 
 	for i in range(ray_count + 1):
 		var angle_rad = deg_to_rad(start_angle + i * angle_step)
@@ -57,8 +59,9 @@ func update_vision_cone():
 		var hit_point = result.position if result else target
 		points.append(pivot.to_local(hit_point))
 
-		if result and result.collider == player:
-			player_seen = true
+		if result and result.collider == target_node:
+			is_player_seen = true
+			player_seen.emit()
 
-	vision_cone.color = Color.RED if player_seen else Color.GREEN
+	vision_cone.color = Color.RED if is_player_seen else Color.GREEN
 	vision_cone.polygon = points
