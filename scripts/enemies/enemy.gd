@@ -10,12 +10,16 @@ signal player_seen
 @export var ray_count: int = 30
 @export var vision_cone: Polygon2D
 @export var pivot: Node2D
+@export var max_step_cooldown: float = 1
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var target_node: Node2D = get_node("../Player")
+@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
+var current_step_cooldown: float = 0
 var patrol_index: int = 0
 var is_player_seen: bool = false
+var is_moving: bool = true
 
 func _ready():
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
@@ -33,9 +37,18 @@ func _physics_process(_delta: float) -> void:
 	
 	var direction = global_position.direction_to(nav_agent.get_next_path_position())
 	nav_agent.velocity = direction * speed
+	
+	current_step_cooldown += _delta
+		
+	if current_step_cooldown >= max_step_cooldown:
+		current_step_cooldown = 0
+		audio_player.pitch_scale = randf_range(.5, 1.5)
+		audio_player.play()
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = velocity.move_toward(safe_velocity, 100)
+	if not is_moving:
+		velocity = Vector2.ZERO
 	move_and_slide()
 
 func update_vision_cone():

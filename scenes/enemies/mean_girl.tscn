@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfxotgpn5ic65"]
+
+[ext_resource type="PackedScene" uid="uid://djatvehobgh17" path="res://scenes/enemies/enemy.tscn" id="1_kl12m"]
+[ext_resource type="Texture2D" uid="uid://ba4ftx3un4teh" path="res://assets/sprites/enemies/1750065265352.png" id="2_0argy"]
+[ext_resource type="Script" uid="uid://b6ecbq27gmai" path="res://scripts/enemies/mean_girl.gd" id="2_sapnd"]
+
+[node name="MeanGirl" instance=ExtResource("1_kl12m")]
+script = ExtResource("2_sapnd")
+alert_radius = 200.0
+max_alerting_cooldown = 5
+patrol_points = Array[Vector2]([])
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_0argy")
