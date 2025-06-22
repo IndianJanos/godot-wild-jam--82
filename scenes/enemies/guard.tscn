@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1kiehyeaeclh"]
+[gd_scene load_steps=3 format=3 uid="uid://rbricdu3ts37"]
 
 [ext_resource type="PackedScene" uid="uid://djatvehobgh17" path="res://scenes/enemies/enemy.tscn" id="1_k5p1f"]
+[ext_resource type="Texture2D" uid="uid://broxojqfnk8ov" path="res://assets/sprites/enemies/1750535865552.png" id="2_bgj1j"]
 
 [node name="Guard" instance=ExtResource("1_k5p1f")]
 cone_length = 75.0
 cone_angle = 120.0
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_bgj1j")

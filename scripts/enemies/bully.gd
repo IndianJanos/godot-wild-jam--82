@@ -5,7 +5,7 @@ func _ready() -> void:
 	player_seen.connect(_on_player_seen)
 	
 func _on_player_seen() -> void:
-	print("Game Over")
+	get_tree().reload_current_scene()
 
 func alert() -> void:
 	nav_agent.target_position = target_node.global_position

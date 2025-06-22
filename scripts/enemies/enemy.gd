@@ -23,6 +23,7 @@ var is_moving: bool = true
 
 func _ready():
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
+	player_seen.connect(_on_player_seen)  # Most már figyeli a jelet
 
 	if patrol_points.size() > 0:
 		nav_agent.target_position = patrol_points[patrol_index]
@@ -58,7 +59,7 @@ func update_vision_cone():
 	var origin = pivot.global_position
 	var space_state = get_world_2d().direct_space_state
 
-	is_player_seen = false
+	var player_detected_this_frame = false
 
 	for i in range(ray_count + 1):
 		var angle_rad = deg_to_rad(start_angle + i * angle_step)
@@ -73,8 +74,19 @@ func update_vision_cone():
 		points.append(pivot.to_local(hit_point))
 
 		if result and result.collider == target_node:
-			is_player_seen = true
-			player_seen.emit()
+			player_detected_this_frame = true
 
-	vision_cone.color = Color.RED if is_player_seen else Color.GREEN
+	if player_detected_this_frame and not is_player_seen:
+		is_player_seen = true
+		player_seen.emit()
+
+	vision_cone.color = Color.RED if player_detected_this_frame else Color.GREEN
 	vision_cone.polygon = points
+
+func _on_player_seen() -> void:
+	print("Player seen, reloading scene...")
+	get_tree().reload_current_scene()
+
+func alert() -> void:
+	nav_agent.target_position = target_node.global_position
+	pivot.look_at(nav_agent.get_next_path_position())

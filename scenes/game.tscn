@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://5utu4n5gi82" path="res://scenes/enemies/bully.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/mean_girl.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://d2o0k782n4qx6" path="res://scenes/enemies/bully3.tscn" id="4_vtaks"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/guard.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://rbricdu3ts37" path="res://scenes/enemies/guard.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://dxn8xrsqi57we" path="res://scenes/interactables/tools/chewing_gum.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://drvbjwnetj3iv" path="res://scenes/enemies/MeanGirl2.tscn" id="7_trtic"]
 [ext_resource type="PackedScene" uid="uid://chtten5p82n8u" path="res://scenes/interactables/tools/tool.tscn" id="7_u5sy4"]
