@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=4 uid="uid://bim8w7s70lfbb"]
 
 [ext_resource type="TileSet" uid="uid://c3xn7o75bmbg0" path="res://tile_sets/school.tres" id="1_p57ef"]
-[ext_resource type="PackedScene" uid="uid://b3swthp7kvu5e" path="res://scenes/player.tscn" id="3_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://qmufihso728u" path="res://scenes/enemies/bully.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://dfxotgpn5ic65" path="res://scenes/enemies/mean_girl.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://c1kiehyeaeclh" path="res://scenes/enemies/guard.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://gvwhoss8ffjd" path="res://scenes/player.tscn" id="3_lbhrr"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bully.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/mean_girl.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/guard.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://dxn8xrsqi57we" path="res://scenes/interactables/tools/chewing_gum.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://chtten5p82n8u" path="res://scenes/interactables/tools/tool.tscn" id="7_u5sy4"]
 
@@ -21,7 +21,6 @@ tile_map_data = PackedByteArray("AADJABYAEAAAAAAAAADKABYAHQAAAAAAABDCABMAHQAAAAA
 tile_set = ExtResource("1_p57ef")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="TileMapLayer"]
-visible = false
 position = Vector2(-0.000549316, 0.000305176)
 scale = Vector2(0.999996, 0.999999)
 color = Color(0, 0, 0, 1)

@@ -13,10 +13,17 @@ func _physics_process(delta: float) -> void:
 
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-
+	
+	if input_vector.x < 0:
+		$AnimatedSprite2D.flip_h = true
+	elif input_vector.x > 0:
+		$AnimatedSprite2D.flip_h = false
+	
 	if input_vector.length_squared() > 0:
 		input_vector = input_vector.normalized()
-
+		$AnimatedSprite2D.play("run")
+	elif input_vector.length_squared() == 0:
+		$AnimatedSprite2D.play("standing")
 	velocity = input_vector * speed
 	move_and_slide()
 	

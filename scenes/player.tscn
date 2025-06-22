@@ -1,8 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3swthp7kvu5e"]
+[gd_scene load_steps=7 format=3 uid="uid://gvwhoss8ffjd"]
 
 [ext_resource type="Script" uid="uid://cbxb2ln75d0qc" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://c4vik3f4g8750" path="res://assets/sprites/player0.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dlr1tmmj24u3u" path="res://assets/sprites/light.png" id="3_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://bf61bmljvkcki" path="res://assets/sprites/1750534169554.png" id="4_dqkch"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dqkch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dqkch")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dqkch")
+}],
+"loop": true,
+"name": &"standing",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
 size = Vector2(15, 20)
@@ -11,7 +34,12 @@ size = Vector2(15, 20)
 script = ExtResource("1_qhqgy")
 speed = 100.0
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qlg0r")
+animation = &"standing"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_dqkch")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
