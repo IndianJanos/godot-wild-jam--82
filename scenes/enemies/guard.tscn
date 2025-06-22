@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1kiehyeaeclh"]
+
+[ext_resource type="PackedScene" uid="uid://djatvehobgh17" path="res://scenes/enemies/enemy.tscn" id="1_k5p1f"]
+
+[node name="Guard" instance=ExtResource("1_k5p1f")]
+cone_length = 75.0
+cone_angle = 120.0

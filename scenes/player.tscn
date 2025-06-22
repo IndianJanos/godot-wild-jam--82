@@ -15,7 +15,7 @@ speed = 100.0
 texture = ExtResource("2_dqkch")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-4, -20)
+position = Vector2(0, 3)
 color = Color(0.999999, 0.813079, 0.750217, 1)
 blend_mode = 2
 shadow_enabled = true
