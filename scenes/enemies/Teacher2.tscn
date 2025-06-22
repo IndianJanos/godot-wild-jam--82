@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bev18qkko8w11"]
+
+[ext_resource type="PackedScene" uid="uid://djatvehobgh17" path="res://scenes/enemies/enemy.tscn" id="1_3o54h"]
+[ext_resource type="Script" uid="uid://dhylpwn4vwnav" path="res://scripts/enemies/bully.gd" id="2_qjm1u"]
+[ext_resource type="Texture2D" uid="uid://diw12vdnn64qo" path="res://assets/sprites/enemies/1750066740020.png" id="3_3o54h"]
+
+[node name="Bully" groups=["bully"] instance=ExtResource("1_3o54h")]
+script = ExtResource("2_qjm1u")
+patrol_points = Array[Vector2]([])
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("3_3o54h")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://qmufihso728u"]
+[gd_scene load_steps=3 format=3 uid="uid://5utu4n5gi82"]
 
 [ext_resource type="PackedScene" uid="uid://djatvehobgh17" path="res://scenes/enemies/enemy.tscn" id="1_6d5he"]
 [ext_resource type="Script" uid="uid://dhylpwn4vwnav" path="res://scripts/enemies/bully.gd" id="2_hkixd"]
