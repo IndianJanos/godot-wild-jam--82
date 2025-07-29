@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgxsl0xphwag7"]
+
+[ext_resource type="PackedScene" uid="uid://bpas328re66io" path="res://scenes/status_effects/status_effect.tscn" id="1_tyh4b"]
+[ext_resource type="Script" uid="uid://d382c6l3ni6kw" path="res://scripts/status_effects/blind_effect.gd" id="2_bvg8j"]
+
+[node name="BlindEffect" instance=ExtResource("1_tyh4b")]
+script = ExtResource("2_bvg8j")
+strength = 3.0

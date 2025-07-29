@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://barde24uqs88l"]
+
+[ext_resource type="PackedScene" uid="uid://chtten5p82n8u" path="res://scenes/interactables/tools/tool.tscn" id="1_81x6e"]
+[ext_resource type="Script" uid="uid://qskwkdm6ov40" path="res://scripts/interactables/tools/spit_ball.gd" id="2_qva8b"]
+[ext_resource type="PackedScene" uid="uid://cisgks8vgy7ay" path="res://scenes/interactables/tools/spit_projectile.tscn" id="3_e7raw"]
+
+[node name="SpitBall" instance=ExtResource("1_81x6e")]
+script = ExtResource("2_qva8b")
+packed_spit_projectile = ExtResource("3_e7raw")
+packed_effect = ExtResource("3_e7raw")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1, 1)
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+disabled = true

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyfmusc48v2lv"]
+
+[ext_resource type="PackedScene" uid="uid://bpas328re66io" path="res://scenes/status_effects/status_effect.tscn" id="1_sb2qa"]
+[ext_resource type="Script" uid="uid://d1j1sjukyojao" path="res://scripts/status_effects/slow_effect.gd" id="2_38hct"]
+
+[node name="SlowEffect" instance=ExtResource("1_sb2qa")]
+script = ExtResource("2_38hct")
+strength = 3.0

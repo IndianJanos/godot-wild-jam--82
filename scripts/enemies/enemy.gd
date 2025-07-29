@@ -20,6 +20,7 @@ var current_step_cooldown: float = 0
 var patrol_index: int = 0
 var is_player_seen: bool = false
 var is_moving: bool = true
+var is_pranked: bool = false
 
 func _ready():
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
@@ -39,12 +40,13 @@ func _physics_process(_delta: float) -> void:
 	var direction = global_position.direction_to(nav_agent.get_next_path_position())
 	nav_agent.velocity = direction * speed
 	
-	current_step_cooldown += _delta
-		
-	if current_step_cooldown >= max_step_cooldown:
-		current_step_cooldown = 0
-		audio_player.pitch_scale = randf_range(.5, 1.5)
-		audio_player.play()
+	if is_moving:
+		current_step_cooldown += _delta
+			
+		if current_step_cooldown >= max_step_cooldown:
+			current_step_cooldown = 0
+			audio_player.pitch_scale = randf_range(.1, .5)
+			audio_player.play()
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = velocity.move_toward(safe_velocity, 100)
@@ -84,9 +86,5 @@ func update_vision_cone():
 	vision_cone.polygon = points
 
 func _on_player_seen() -> void:
-	print("Player seen, reloading scene...")
-	get_tree().reload_current_scene()
-
-func alert() -> void:
-	nav_agent.target_position = target_node.global_position
-	pivot.look_at(nav_agent.get_next_path_position())
+	push_warning("Override", name, "._on_player_seen")
+	

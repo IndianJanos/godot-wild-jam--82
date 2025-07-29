@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxn8xrsqi57we"]
+[gd_scene load_steps=5 format=3 uid="uid://dxn8xrsqi57we"]
 
 [ext_resource type="PackedScene" uid="uid://chtten5p82n8u" path="res://scenes/interactables/tools/tool.tscn" id="1_it0b1"]
-[ext_resource type="Texture2D" uid="uid://0hkt3ew7qjwq" path="res://icon.svg" id="2_j18gg"]
+[ext_resource type="Script" uid="uid://b54qcxmokft8h" path="res://scripts/interactables/tools/chewing_gum.gd" id="2_c8si6"]
+[ext_resource type="Texture2D" uid="uid://cdc1rlgt50rhu" path="res://assets/sprites/interactables/tools/chewing_gum.png" id="2_j18gg"]
+[ext_resource type="PackedScene" uid="uid://dyfmusc48v2lv" path="res://scenes/status_effects/slow_effect.tscn" id="3_hi84k"]
 
 [node name="ChewingGum" instance=ExtResource("1_it0b1")]
+script = ExtResource("2_c8si6")
+packed_effect = ExtResource("3_hi84k")
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -9.53674e-07)
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_j18gg")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-1, -2, 2, -2, 3, 0, 3, 1, 1, 3, -1, 3, -2, 1, -2, -1)

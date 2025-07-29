@@ -33,14 +33,11 @@ size = Vector2(15, 20)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_qhqgy")
 speed = 100.0
+interact_distance = 25.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"standing"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_dqkch")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, 3)
@@ -56,3 +53,21 @@ shape = SubResource("RectangleShape2D_yqjtg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+z_index = 1
+anchors_preset = -1
+anchor_left = -0.08
+anchor_top = -0.081
+anchor_right = -0.08
+anchor_bottom = -0.081
+offset_left = 102.4
+offset_top = 58.32
+offset_right = 119.4
+offset_bottom = 100.32
+theme_override_font_sizes/font_size = 30
+text = "5"

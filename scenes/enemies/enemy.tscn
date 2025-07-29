@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bymq0ctd1hpyl" path="res://scripts/enemies/enemy.gd" id="1_8e3ao"]
 [ext_resource type="Texture2D" uid="uid://b48fkeixto7o4" path="res://assets/sprites/enemies/1750064194254.png" id="2_8e3ao"]
-[ext_resource type="AudioStream" uid="uid://b7hvodmmx4572" path="res://assets/audio/walk.wav" id="3_38ino"]
+[ext_resource type="AudioStream" uid="uid://hxfdeay7iig2" path="res://assets/audio/step.mp3" id="3_38ino"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iywne"]
 radius = 8.0
 height = 24.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("vision_cone", "pivot")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("vision_cone", "pivot") groups=["enemy"]]
 script = ExtResource("1_8e3ao")
 patrol_points = Array[Vector2]([Vector2(6420, 688), Vector2(6292, 592)])
 vision_cone = NodePath("Pivot/Polygon2D")
@@ -36,3 +36,5 @@ texture = ExtResource("2_8e3ao")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_38ino")
+volume_db = -20.0
+max_distance = 1000.0
